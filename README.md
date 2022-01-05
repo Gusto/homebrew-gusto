@@ -1,10 +1,21 @@
-# Gusto Gusto
+# Homebrew with Gusto
 
 ## How do I install these formulae?
 
-`brew install gusto/gusto/<formula>`
+From the command line:
 
-Or `brew tap gusto/gusto` and then `brew install <formula>`.
+```shell
+brew tap gusto/gusto git@github.com:Gusto/homebrew-gusto.git
+brew install <formula>
+```
+
+From a `Brewfile`:
+
+```ruby
+tap 'gusto/gusto', 'git@github.com:Gusto/homebrew-gusto.git'
+
+brew '<formula>'
+```
 
 ## Documentation
 
