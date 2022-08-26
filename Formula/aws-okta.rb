@@ -1,3 +1,7 @@
+# Why is this here?
+# Using the upstream aws-okta formula, people aren't able install aws-okta anymore. This fork
+# will allow people to install aws-okta by brew install gusto/gusto/aws-okta
+# See https://github.com/segmentio/aws-okta/issues/278 for upstream notification
 class AwsOkta < Formula
   desc "Authenticate with AWS using your Okta credentials"
   homepage "https://github.com/segmentio/aws-okta"
