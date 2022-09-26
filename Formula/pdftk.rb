@@ -11,8 +11,7 @@
 # The difference is this is a formlua, not a cask. It also extracts the contents of the pkg
 # to install directly, rather than relaying on the package
 class Pdftk < Formula
-  version '2.02'
-  FILENAME = "pdftk_server-#{version}-mac_osx-10.11-setup.pkg"
+  FILENAME = "pdftk_server-2.02-mac_osx-10.11-setup.pkg"
   homepage 'https://www.pdflabs.com/tools/pdftk-server'
   url "https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/#{FILENAME}"
   sha256 'c33cf95151e477953cd57c1ea9c99ebdc29d75f4c9af0d5f947b385995750b0c'
