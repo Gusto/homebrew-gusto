@@ -21,7 +21,13 @@ class Pdftk < Formula
     safe_system '/usr/bin/xar', '-xf', FILENAME
     Dir.mkdir 'tmp'
     safe_system 'tar -xf pdftk.pkg/Payload -C tmp/.'
-    prefix.install Dir['tmp/*']
+
+    # don't install man files into the prefix
+    prefix_files = Dir['tmp/*'] - ['tmp/man']
+    prefix.install prefix_files
+
+    # install the man files to the correct subdirectory instead
+    man1.install Dir['tmp/man/pdftk.1']
   end
 
   test do
