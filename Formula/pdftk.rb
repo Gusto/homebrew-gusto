@@ -1,4 +1,3 @@
-
 # typed: false
 # frozen_string_literal: true
 
@@ -11,26 +10,27 @@
 # The difference is this is a formlua, not a cask. It also extracts the contents of the pkg
 # to install directly, rather than relaying on the package
 class Pdftk < Formula
+  desc "CLI for working with PDFs"
   FILENAME = "pdftk_server-2.02-mac_osx-10.11-setup.pkg"
-  homepage 'https://www.pdflabs.com/tools/pdftk-server'
+  homepage "https://www.pdflabs.com/tools/pdftk-server"
   url "https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/#{FILENAME}"
-  sha256 'c33cf95151e477953cd57c1ea9c99ebdc29d75f4c9af0d5f947b385995750b0c'
+  sha256 "c33cf95151e477953cd57c1ea9c99ebdc29d75f4c9af0d5f947b385995750b0c"
 
   def install
     # Outputs it to pdftk.pkg/*
-    safe_system '/usr/bin/xar', '-xf', FILENAME
-    Dir.mkdir 'tmp'
-    safe_system 'tar -xf pdftk.pkg/Payload -C tmp/.'
+    safe_system "/usr/bin/xar", "-xf", FILENAME
+    Dir.mkdir "tmp"
+    safe_system "tar", "-xf", "pdftk.pkg/Payload", "-C", "tmp/."
 
     # don't install man files into the prefix
-    prefix_files = Dir['tmp/*'] - ['tmp/man']
+    prefix_files = Dir["tmp/*"] - ["tmp/man"]
     prefix.install prefix_files
 
     # install the man files to the correct subdirectory instead
-    man1.install Dir['tmp/man/pdftk.1']
+    man1.install "tmp/man/pdftk.1"
   end
 
   test do
-    system "#{bin}/pdftk", '--version'
+    system "#{bin}/pdftk", "--version"
   end
 end

@@ -29,12 +29,12 @@ class Yvm < Formula
     update_self_disabled = "echo 'YVM update-self disabled. Use `brew upgrade yvm`.'"
     inreplace "yvm.sh" do |s|
       s.gsub! 'YVM_DIR=${YVM_DIR-"${HOME}/.yvm"}', "YVM_DIR='#{prefix}'"
-      s.gsub! "curl -fsSL https://raw.githubusercontent.com/tophat/yvm/master/scripts/install.js"\
-              " | YVM_INSTALL_DIR=${YVM_DIR} node", update_self_disabled
+      s.gsub! "curl -fsSL https://raw.githubusercontent.com/tophat/yvm/master/scripts/install.js " \
+              "| YVM_INSTALL_DIR=${YVM_DIR} node", update_self_disabled
     end
     inreplace "yvm.fish" do |s|
       s.gsub! 'set -q YVM_DIR; or set -gx YVM_DIR "$HOME/.yvm"', "set -gx YVM_DIR '#{prefix}'"
-      s.gsub! "env YVM_INSTALL_DIR=$YVM_DIR curl -fsSL https://raw.githubusercontent.com/tophat/yvm"\
+      s.gsub! "env YVM_INSTALL_DIR=$YVM_DIR curl -fsSL https://raw.githubusercontent.com/tophat/yvm" \
               "/master/scripts/install.js | node", update_self_disabled
     end
   end
@@ -58,7 +58,7 @@ class Yvm < Formula
   end
 
   test do
-    File.write("#{ENV["HOME"]}/.bashrc", "")
+    File.write("#{Dir.home}/.bashrc", "")
     system "node", "#{prefix}/yvm.js", "configure-shell", "--yvmDir", prefix.to_s
     assert_match prefix.to_s, shell_output("bash -i -c 'echo $YVM_DIR'").strip
     shell_output("bash -i -c 'yvm ls-remote'")
