@@ -9,8 +9,8 @@ class WaitForIt < Formula
   url "https://github.com/vishnubob/wait-for-it.git", ref: COMMIT
   head "https://github.com/vishnubob/wait-for-it.git"
   license "MIT"
-  sha256 "8a841290928ba4aa930089a16b8b31eb24f0cfd036dd8ee88be371130eb85961"
   version COMMIT
+  sha256 "8a841290928ba4aa930089a16b8b31eb24f0cfd036dd8ee88be371130eb85961"
 
   def install
     bin.install "wait-for-it.sh" => "wait-for-it"
