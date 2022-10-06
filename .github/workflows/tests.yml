@@ -34,7 +34,7 @@ jobs:
 
       - run: brew test-bot --only-setup
 
-      - run: brew test-bot --only-tap-syntax
+      - run: brew style gusto/gusto && brew readall --aliases gusto/gusto && brew audit --tap=gusto/gusto --except=specs
 
       - run: brew test-bot --only-formulae
         if: github.event_name == 'pull_request'
