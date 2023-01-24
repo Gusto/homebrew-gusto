@@ -39,7 +39,10 @@ class LibgdaAT5 < Formula
                           "--disable-gtk-doc",
                           "--without-java",
                           "--enable-introspection",
-                          "--enable-system-sqlite=no"
+                          "--enable-system-sqlite=no",
+                          # TODO: do we really disable? or add to depends and add directory
+                          "--with-postgres=no",
+                          "--with-mysql=no"
     system "make"
     system "make", "install"
   end
