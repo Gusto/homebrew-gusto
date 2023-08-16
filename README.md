@@ -1,5 +1,10 @@
 # Homebrew with Gusto
 
+This is a collection of homebrew formulas that we use at Gusto, we maintain these because:
+* We have to slightly adjust what's available upstream
+* We have to lock to a version no longer available upstream
+* We have to distribute tools without generally available packaging
+
 ## How do I install these formulae?
 
 From the command line:
