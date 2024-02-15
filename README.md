@@ -17,9 +17,9 @@ brew install <formula>
 From a `Brewfile`:
 
 ```ruby
-tap 'gusto/gusto', 'git@github.com:Gusto/homebrew-gusto.git'
+tap "gusto/gusto", "git@github.com:Gusto/homebrew-gusto.git"
 
-brew '<formula>'
+brew "<formula>"
 ```
 
 ## Documentation
