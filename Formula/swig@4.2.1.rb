@@ -1,8 +1,8 @@
-class SwigAT411 < Formula
+class SwigAT421 < Formula
   desc "Generate scripting interfaces to C/C++ code"
   homepage "https://www.swig.org/"
-  url "https://downloads.sourceforge.net/project/swig/swig/swig-4.1.1/swig-4.1.1.tar.gz"
-  sha256 "2af08aced8fcd65cdb5cc62426768914bedc735b1c250325203716f78e39ac9b"
+  url "https://downloads.sourceforge.net/project/swig/swig/swig-4.2.1/swig-4.2.1.tar.gz"
+  sha256 "fa045354e2d048b2cddc69579e4256245d4676894858fcf0bab2290ecf59b7d8"
   license "GPL-3.0-or-later"
 
   head do
@@ -14,11 +14,12 @@ class SwigAT411 < Formula
 
   keg_only "versioned formulae"
 
+  depends_on "python-setuptools" => :test
+  depends_on "python@3.12" => :test
   depends_on "pcre2"
 
-  uses_from_macos "python" => :test
-
   def install
+    ENV.append "CXXFLAGS", "-std=c++11" # Fix `nullptr` support detection.
     system "./autogen.sh" if build.head?
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"
