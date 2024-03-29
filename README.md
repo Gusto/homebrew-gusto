@@ -34,7 +34,6 @@ Install local formula
 brew install gusto/gustotest/<formula>
 ```
 
-
 ## Documentation
 
 `brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
