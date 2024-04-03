@@ -4,8 +4,8 @@
 class Packs < Formula
   desc "Pure Rust implementation of packwerk, a gradual modularization tool for Ruby"
   homepage "https://github.com/alexevanczuk/packs"
-  url "https://github.com/alexevanczuk/packs/releases/download/v0.1.91/packs-mac.tar.gz"
-  sha256 "06a06845bd0bb66c6cc86b3103d949ca424b2dd268ee5d4e5c9c8f0693648366"
+  url "https://github.com/alexevanczuk/packs/releases/download/v0.1.92/packs-mac.tar.gz"
+  sha256 "6d110aa03a19301fd8e85bfc1b2bca6606c9181de7c551ed529b8e58b7c865d7"
   license "MIT"
 
   def install
