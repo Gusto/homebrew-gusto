@@ -10,10 +10,10 @@ class Gustovm < Formula
 
   depends_on "go" => :build
   depends_on "docker"
-  depends_on "docker-credential-helper-ecr"
-  depends_on "docker-compose" 
   depends_on "docker-buildx"
+  depends_on "docker-compose"
   depends_on "docker-credential-helper"
+  depends_on "docker-credential-helper-ecr"
   depends_on "lima"
 
   def install
