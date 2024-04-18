@@ -1,5 +1,5 @@
 class Gustovm < Formula
-  desc "Gusto's opinionated container runtime for MacOS (and Linux)"
+  desc "Gusto's opinionated colima profile"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
   url "https://github.com/abiosoft/colima.git",
       tag:      "v0.6.8",
