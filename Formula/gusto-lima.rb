@@ -47,15 +47,12 @@ class GustoLima < Formula
       env: {}
     YAML
     # Create a gusto colima profile
-    user_home = Pathname.new(Dir.home)
-    (user_home/".colima/gusto").mkpath
-    new_file = user_home/".colima/gusto/colima.yaml"
-    File.open(new_file, "w") do |f|
-      f.write(gusto_profile_config)
-    end
+    colima_profile_path = Pathname.new(Dir.home)/".colima/gusto"
+    colima_profile_path.mkpath
+    File.write(colima_profile_path/"colima.yaml", gusto_profile_config)
 
     bin.install_symlink opt_bin/"colima@0.6.8" => "gusto-lima"
-  end 
+  end
 
   service do
     run [opt_bin/"colima@0.6.8", "start", "-f", "gusto"]
