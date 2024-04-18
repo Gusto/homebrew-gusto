@@ -23,6 +23,8 @@ class Colima < Formula
       -X #{project}/config.revision=#{Utils.git_head}
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/colima"
+
+    bin.install_symlink opt_bin/"colima" => "colima@0.6.8"
   end
 
   service do

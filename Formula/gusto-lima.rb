@@ -53,11 +53,12 @@ class GustoLima < Formula
     File.open(new_file, "w") do |f|
       f.write(gusto_profile_config)
     end
-    bin.install_symlink "/opt/homebrew/opt/colima/bin/colima" => "gusto-lima"
+
+    bin.install_symlink opt_bin/"colima@0.6.8" => "gusto-lima"
   end 
 
   service do
-    run [opt_bin/"colima", "start", "-f", "gusto"]
+    run [opt_bin/"colima@0.6.8", "start", "-f", "gusto"]
     keep_alive successful_exit: true
     environment_variables PATH: std_service_path_env
     error_log_path var/"log/gusto.log"
@@ -66,7 +67,7 @@ class GustoLima < Formula
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/colima version 2>&1")
-    assert_match "colima is not running", shell_output("#{bin}/colima status 2>&1", 1)
+    assert_match version.to_s, shell_output("#{bin}/colima@0.6.8 version 2>&1")
+    assert_match "colima@0.6.8 is not running", shell_output("#{bin}/colima@0.6.8 status 2>&1", 1)
   end
 end
