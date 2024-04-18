@@ -28,7 +28,7 @@ class Colima < Formula
   end
 
   service do
-    run [opt_bin/"colima", "start", "-f"]
+    run [opt_bin/"colima@0.6.8", "start", "-f"]
     keep_alive successful_exit: true
     environment_variables PATH: std_service_path_env
     error_log_path var/"log/default.log"
@@ -37,7 +37,7 @@ class Colima < Formula
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/colima version 2>&1")
-    assert_match "colima is not running", shell_output("#{bin}/colima status 2>&1", 1)
+    assert_match version.to_s, shell_output("#{bin}/colima@0.6.8 version 2>&1")
+    assert_match "colima@0.6.8 is not running", shell_output("#{bin}/colima@0.6.8 status 2>&1", 1)
   end
 end
