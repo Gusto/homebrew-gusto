@@ -12,7 +12,7 @@ class Gustovm < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
-  depends_on "gusto/gustotest/colima"
+  depends_on "gusto/gusto/colima"
   depends_on "docker"
   depends_on "docker-buildx"
   depends_on "docker-compose"
