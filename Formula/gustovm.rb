@@ -12,45 +12,45 @@ class Gustovm < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
-  depends_on "gusto/gusto/colima"
   depends_on "docker"
   depends_on "docker-buildx"
   depends_on "docker-compose"
   depends_on "docker-credential-helper"
   depends_on "docker-credential-helper-ecr"
+  depends_on "gusto/gusto/colima"
 
   def install
     gusto_profile_config = <<~YAML
-  cpu: 4
-  disk: 60
-  memory: 8
-  arch: host
-  runtime: docker
-  hostname: ""
-  kubernetes:
-  enabled: false
-  version: v1.24.3+k3s1
-  k3sArgs:
-    - --disable=traefik
-  autoActivate: true
-  network:
-  address: false
-  dnsHosts:
-    host.docker.internal: host.lima.internal
-  forwardAgent: false
-  docker: {}
-  vmType: vz
-  rosetta: false
-  mountType: virtiofs
-  mountInotify: false
-  cpuType: host
-  provision:
-    - mode: system
-      script: sysctl -w vm.max_map_count=262144
-  sshConfig: true
-  mounts: []
-  env: {}
-YAML
+      cpu: 4
+      disk: 60
+      memory: 8
+      arch: host
+      runtime: docker
+      hostname: ""
+      kubernetes:
+      enabled: false
+      version: v1.24.3+k3s1
+      k3sArgs:
+        - --disable=traefik
+      autoActivate: true
+      network:
+      address: false
+      dnsHosts:
+        host.docker.internal: host.lima.internal
+      forwardAgent: false
+      docker: {}
+      vmType: vz
+      rosetta: false
+      mountType: virtiofs
+      mountInotify: false
+      cpuType: host
+      provision:
+        - mode: system
+          script: sysctl -w vm.max_map_count=262144
+      sshConfig: true
+      mounts: []
+      env: {}
+    YAML
     # Create a gusto colima profile
     user_home = Pathname.new(Dir.home)
     (user_home/".colima/gusto").mkpath

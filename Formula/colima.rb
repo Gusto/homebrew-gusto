@@ -23,8 +23,8 @@ class Colima < Formula
       -X #{project}/config.revision=#{Utils.git_head}
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/colima"
-  end 
-  
+  end
+
   service do
     run [opt_bin/"colima", "start", "-f"]
     keep_alive successful_exit: true
