@@ -1,4 +1,4 @@
-class Gustovm < Formula
+class GustoLima < Formula
   desc "Gusto's opinionated colima profile"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
   url "https://github.com/abiosoft/colima.git",
@@ -6,11 +6,6 @@ class Gustovm < Formula
       revision: "9b0809d0ed9ad3ff1e57c405f27324e6298ca04f"
   license "MIT"
   head "https://github.com/abiosoft/colima.git", branch: "main"
-
-  livecheck do
-    url :stable
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
-  end
 
   depends_on "docker"
   depends_on "docker-buildx"
@@ -58,7 +53,7 @@ class Gustovm < Formula
     File.open(new_file, "w") do |f|
       f.write(gusto_profile_config)
     end
-    bin.install_symlink "/opt/homebrew/opt/colima/bin/colima" => "gustovm"
+    bin.install_symlink "/opt/homebrew/opt/colima/bin/colima" => "gusto-lima"
   end 
 
   service do
