@@ -15,7 +15,7 @@ class GustoLima < Formula
 
   def install
 
-    bin.install_symlink bin/"colima" => bin/"gusto_lima"
+    bin.install_symlink "/opt/homebrew/opt/colima/bin/colima" => "gusto-lima"
 
     gusto_profile_config = <<~YAML
       cpu: 4
