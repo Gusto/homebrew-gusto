@@ -1,4 +1,4 @@
-class Colima < Formula
+class ColimaAT068 < Formula
   desc "Container runtime for MacOS (and Linux)"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
   url "https://github.com/abiosoft/colima.git",
@@ -23,8 +23,7 @@ class Colima < Formula
       -X #{project}/config.revision=#{Utils.git_head}
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/colima"
-
-    bin.install_symlink opt_bin/"colima" => "colima@0.6.8"
+    bin.install_symlink bin/"colima@0.6.8" => bin/"colima"
   end
 
   service do
