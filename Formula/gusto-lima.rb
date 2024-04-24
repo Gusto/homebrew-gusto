@@ -14,44 +14,7 @@ class GustoLima < Formula
   depends_on "docker-credential-helper-ecr"
 
   def install
-
-    bin.install_symlink "/opt/homebrew/opt/colima/bin/colima" => "gusto-lima"
-
-    gusto_profile_config = <<~YAML
-      cpu: 4
-      disk: 60
-      memory: 8
-      arch: host
-      runtime: docker
-      hostname: ""
-      kubernetes:
-      enabled: false
-      version: v1.24.3+k3s1
-      k3sArgs:
-        - --disable=traefik
-      autoActivate: true
-      network:
-      address: false
-      dnsHosts:
-        host.docker.internal: host.lima.internal
-      forwardAgent: false
-      docker: {}
-      vmType: vz
-      rosetta: false
-      mountType: virtiofs
-      mountInotify: false
-      cpuType: host
-      provision:
-        - mode: system
-          script: sysctl -w vm.max_map_count=262144
-      sshConfig: true
-      mounts: []
-      env: {}
-    YAML
-
-    colima_profile_path = Pathname.new(Dir.home)/".colima/gusto"
-    colima_profile_path.mkpath
-    File.write(colima_profile_path/"colima.yaml", gusto_profile_config)
+    bin.install "colima" => "gusto-lima"
   end
 
   service do
