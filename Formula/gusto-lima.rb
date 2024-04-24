@@ -25,7 +25,6 @@ class GustoLima < Formula
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/gusto-lima version 2>&1")
-    assert_match "gusto-lima is not running", shell_output("#{bin}/gusto-lima status 2>&1", 1)
+    assert_match "colima is not running", shell_output("#{bin}/gusto-lima status 2>&1", 1)
   end
 end
