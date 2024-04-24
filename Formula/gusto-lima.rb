@@ -1,12 +1,11 @@
 class GustoLima < Formula
-  desc "Gusto's opinionated colima profile"
+  desc "Gusto's Colima Brew Service"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
-  url "https://github.com/gusto/homebrew-gusto.git"
-  sha256 "6df73ae5c606c298d91fcb4f6aa6b3b451082c4a"
+  url "https://github.com/abiosoft/colima.git", tag: "v0.6.8"
 
   depends_on "colima"
   depends_on "docker"
-  depends_on "docker-buildx" 
+  depends_on "docker-buildx"
   depends_on "docker-compose"
   depends_on "docker-credential-helper"
   depends_on "docker-credential-helper-ecr"
