@@ -1,9 +1,7 @@
 class GustoLima < Formula
-  desc "Gusto's opinionated colima profile"
+  desc "Gusto's Colima Brew Service"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
-  url "https://github.com/abiosoft/colima.git", tag: "v0.1.0"
-  license "MIT"
-  head "https://github.com/abiosoft/colima.git", branch: "main"
+  url "https://github.com/gusto/homebrew-gusto.git", tag: "v0.1.0"
 
   depends_on "colima"
   depends_on "docker"
@@ -13,7 +11,7 @@ class GustoLima < Formula
   depends_on "docker-credential-helper-ecr"
 
   def install
-    bin.install "colima" => "gusto-lima"
+    bin.install_symlink Formula["colima"].bin/"colima" => "gusto-lima"
   end
 
   service do
