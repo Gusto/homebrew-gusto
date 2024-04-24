@@ -2,7 +2,7 @@ class GustoLima < Formula
   desc "Gusto's Colima Brew Service"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
   url "https://github.com/gusto/homebrew-gusto.git", branch: "main"
-  version "0.1.0" 
+  version "0.1.0"
 
   depends_on "colima"
   depends_on "docker"
