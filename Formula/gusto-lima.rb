@@ -1,8 +1,7 @@
 class GustoLima < Formula
   desc "Gusto's opinionated colima profile"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
-  url "https://github.com/abiosoft/colima.git",
-    tag:      "v0.1.0"
+  url "https://github.com/abiosoft/colima.git", tag: "v0.1.0"
   license "MIT"
   head "https://github.com/abiosoft/colima.git", branch: "main"
 
