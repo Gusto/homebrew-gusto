@@ -15,7 +15,7 @@ class GustoLima < Formula
     gusto_colima_script = Tempfile.new(["colima_gusto", ".sh"])
     gusto_colima_script.write <<~SCRIPT
       #!/bin/bash
-      colima -p gusto $@
+      exec colima -p gusto "$@"
     SCRIPT
 
     gusto_colima_script.chmod(0755)
