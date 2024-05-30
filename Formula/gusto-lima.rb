@@ -35,6 +35,6 @@ class GustoLima < Formula
   end
 
   test do
-    assert_match "colima is not running", shell_output("#{bin}/gusto-lima status 2>&1", 1)
+    assert_match "colima [profile=gusto] is not running", shell_output("#{bin}/gusto-lima status 2>&1", 1)
   end
 end
