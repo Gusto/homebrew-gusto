@@ -18,8 +18,8 @@ class Libgda < Formula
   depends_on "glib"
   depends_on "iso-codes"
   depends_on "json-glib"
-  depends_on "sqlite"
   depends_on "mysql-client"
+  depends_on "sqlite"
 
   uses_from_macos "libxml2"
 
