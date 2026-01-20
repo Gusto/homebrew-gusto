@@ -6,23 +6,25 @@ class SpaceliftCli < Formula
 
   desc "CLI for Gusto's Terraform apply-before-merge workflows on Spacelift"
   homepage "https://github.com/Gusto/spacelift-cli"
-  url "https://github.com/Gusto/spacelift-cli.git", branch: "main"
+  url "https://github.com/Gusto/spacelift-cli.git", branch: "experimental"
   version "1.0.0"
   license "MIT"
-  head "https://github.com/Gusto/spacelift-cli.git", branch: "main"
+  head "https://github.com/Gusto/spacelift-cli.git", branch: "experimental"
 
   depends_on "libyaml"
   depends_on "python@3.11"
 
   def install
-    # Create virtualenv and install the package with all dependencies
-    virtualenv_create(libexec, "python3.11")
-    system libexec/"bin/pip", "install", "-v", "--no-binary", ":all:",
-           "--ignore-installed", buildpath
-
-    # Create wrapper script
-    (bin/"spacelift").write_env_script libexec/"bin/spacelift", PATH: "#{libexec}/bin:$PATH"
-
+    # Create virtualenv in libexec with pip
+    system "python3.11", "-m", "venv", libexec
+    
+    # Install the package from buildpath with all dependencies
+    system libexec/"bin/pip", "install", "--upgrade", "pip", "setuptools", "wheel"
+    system libexec/"bin/pip", "install", buildpath
+    
+    # Link the executable to bin
+    bin.install_symlink libexec/"bin/spacelift"
+    
     # Install shell completions
     bash_completion.install "completion/spacelift-completion.bash" => "spacelift"
     zsh_completion.install "completion/spacelift-completion.zsh" => "_spacelift"
