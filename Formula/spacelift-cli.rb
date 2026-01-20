@@ -4,13 +4,14 @@
 class SpaceliftCli < Formula
   include Language::Python::Virtualenv
 
-  desc "Spacelift CLI for Gusto's Terraform apply-before-merge workflows"
+  desc "CLI for Gusto's Terraform apply-before-merge workflows on Spacelift"
   homepage "https://github.com/Gusto/spacelift-cli"
   url "https://github.com/Gusto/spacelift-cli.git", branch: "main"
   version "1.0.0"
   license "MIT"
   head "https://github.com/Gusto/spacelift-cli.git", branch: "main"
 
+  depends_on "libyaml"
   depends_on "python@3.11"
 
   resource "typer" do
@@ -60,7 +61,7 @@ class SpaceliftCli < Formula
 
   def install
     virtualenv_install_with_resources
-    
+
     # Install shell completions
     bash_completion.install "completion/spacelift-completion.bash" => "spacelift"
     zsh_completion.install "completion/spacelift-completion.zsh" => "_spacelift"
