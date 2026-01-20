@@ -17,14 +17,14 @@ class SpaceliftCli < Formula
   def install
     # Create virtualenv in libexec with pip
     system "python3.11", "-m", "venv", libexec
-    
+
     # Install the package from buildpath with all dependencies
     system libexec/"bin/pip", "install", "--upgrade", "pip", "setuptools", "wheel"
     system libexec/"bin/pip", "install", buildpath
-    
+
     # Link the executable to bin
     bin.install_symlink libexec/"bin/spacelift"
-    
+
     # Install shell completions
     bash_completion.install "completion/spacelift-completion.bash" => "spacelift"
     zsh_completion.install "completion/spacelift-completion.zsh" => "_spacelift"
