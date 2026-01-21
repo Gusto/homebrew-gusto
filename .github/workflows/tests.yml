@@ -9,7 +9,8 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest]
-    runs-on: ${{ matrix.os }}
+    # Use self-hosted runner for PR tests that need access to private repos
+    runs-on: ${{ github.event_name == 'pull_request' && 'gusto-osx-default' || matrix.os }}
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
