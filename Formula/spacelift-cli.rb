@@ -6,10 +6,10 @@ class SpaceliftCli < Formula
 
   desc "CLI for Gusto's Terraform apply-before-merge workflows on Spacelift"
   homepage "https://github.com/Gusto/spacelift-cli"
-  url "https://github.com/Gusto/spacelift-cli.git", branch: "experimental"
+  url "git@github.com:Gusto/spacelift-cli.git", using: :git, branch: "experimental"
   version "1.0.0"
   license "MIT"
-  head "https://github.com/Gusto/spacelift-cli.git", branch: "experimental"
+  head "git@github.com:Gusto/spacelift-cli.git", using: :git, branch: "experimental"
 
   depends_on "libyaml"
   depends_on "python@3.11"
