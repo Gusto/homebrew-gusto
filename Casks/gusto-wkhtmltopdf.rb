@@ -20,8 +20,9 @@ cask "gusto-wkhtmltopdf" do
 
   # can't have the original cask and this one installed
   conflicts_with cask: "wkhtmltopdf"
-
   # end patch
+
+  depends_on :macos
 
   pkg "wkhtmltox-#{version}.macos-cocoa.pkg"
 
