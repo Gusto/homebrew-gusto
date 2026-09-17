@@ -1,36 +1,51 @@
 # typed: false
 # frozen_string_literal: true
 
-# Previously, pdftk was in homebrew-cask, but it was removed because its installer changed
-# /usr/local permissions which caused issues with brew update
+# This formula tracks pdftk-java, a source-compatible reimplementation of pdftk.
 #
-# See https://github.com/Homebrew/homebrew-cask/issues/7707 for more details
+# It previously unpacked PDFLabs' pdftk-server 2.02 pkg, which is an x86_64-only
+# binary built for macOS 10.11. That binary cannot execute on Apple Silicon at all
+# without Rosetta 2, and PDFLabs never shipped an arm64 build. Because the payload
+# was prebuilt rather than compiled, Homebrew happily linked it and the failure only
+# surfaced at runtime as "bad CPU type in executable".
 #
-# This formula was sourced from https://github.com/zph/homebrew-cervezas/blob/master/pdftk.rb
-# The difference is this is a formlua, not a cask. It also extracts the contents of the pkg
-# to install directly, rather than relaying on the package
+# pdftk-java runs on the JVM, so it is architecture-independent. We keep the formula
+# name `pdftk` rather than using homebrew-core's `pdftk-java` directly so that the
+# existing `brew 'gusto/gusto/pdftk'` entries in consumer Brewfiles keep working.
+#
+# Upstream: https://gitlab.com/pdftk-java/pdftk
+# Core formula this mirrors: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/p/pdftk-java.rb
 class Pdftk < Formula
   desc "CLI for working with PDFs"
-  FILENAME = "pdftk_server-2.02-mac_osx-10.11-setup.pkg"
-  homepage "https://www.pdflabs.com/tools/pdftk-server"
-  url "https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/#{FILENAME}"
-  sha256 "c33cf95151e477953cd57c1ea9c99ebdc29d75f4c9af0d5f947b385995750b0c"
+  homepage "https://gitlab.com/pdftk-java/pdftk"
+  url "https://gitlab.com/pdftk-java/pdftk/-/archive/v3.3.3/pdftk-v3.3.3.tar.gz"
+  sha256 "9c947de54658539e3a136e39f9c38ece1cf2893d143abb7f5bf3a2e3e005b286"
+  license "GPL-2.0-or-later"
+  head "https://gitlab.com/pdftk-java/pdftk.git", branch: "master"
+
+  livecheck do
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
+
+  # gradle@8 rather than gradle: https://gitlab.com/pdftk-java/pdftk/-/issues/182
+  depends_on "gradle@8" => :build
+  depends_on "openjdk"
+
+  # Both provide bin/pdftk.
+  conflicts_with "pdftk-java", because: "both install a `pdftk` binary"
 
   def install
-    # Outputs it to pdftk.pkg/*
-    safe_system "/usr/bin/xar", "-xf", FILENAME
-    Dir.mkdir "tmp"
-    safe_system "tar", "-xf", "pdftk.pkg/Payload", "-C", "tmp/."
-
-    # don't install man files into the prefix
-    prefix_files = Dir["tmp/*"] - ["tmp/man"]
-    prefix.install prefix_files
-
-    # install the man files to the correct subdirectory instead
-    man1.install "tmp/man/pdftk.1"
+    system "gradle", "shadowJar", "--no-daemon"
+    libexec.install "build/libs/pdftk-all.jar"
+    bin.write_jar_script libexec/"pdftk-all.jar", "pdftk"
+    man1.install "pdftk.1"
   end
 
   test do
-    system "#{bin}/pdftk", "--version"
+    pdf = test_fixtures("test.pdf")
+    output_path = testpath/"output.pdf"
+    system bin/"pdftk", pdf, pdf, "cat", "output", output_path
+    assert output_path.read.start_with?("%PDF")
   end
 end
