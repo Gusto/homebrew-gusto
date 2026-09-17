@@ -23,11 +23,6 @@ class Pdftk < Formula
   license "GPL-2.0-or-later"
   head "https://gitlab.com/pdftk-java/pdftk.git", branch: "master"
 
-  livecheck do
-    url :stable
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
-  end
-
   # gradle@8 rather than gradle: https://gitlab.com/pdftk-java/pdftk/-/issues/182
   depends_on "gradle@8" => :build
   depends_on "openjdk"
