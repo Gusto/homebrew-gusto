@@ -20,8 +20,9 @@ cask "gusto-wkhtmltopdf" do
 
   # can't have the original cask and this one installed
   conflicts_with cask: "wkhtmltopdf"
-
   # end patch
+
+  depends_on :macos
 
   pkg "wkhtmltox-#{version}.macos-cocoa.pkg"
 
@@ -44,5 +45,11 @@ cask "gusto-wkhtmltopdf" do
 
   caveats do
     files_in_usr_local
+
+    # wkhtmltopdf 0.12.6-2 ships x86_64-only binaries (bin/wkhtmltopdf,
+    # bin/wkhtmltoimage and libwkhtmltox.dylib are all x86_64). Upstream archived
+    # the project without ever shipping an arm64 build, so Apple Silicon needs
+    # Rosetta 2. This caveat is emitted only on arm64 without Rosetta installed.
+    requires_rosetta
   end
 end
