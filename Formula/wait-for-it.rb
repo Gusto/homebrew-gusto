@@ -6,7 +6,7 @@ class WaitForIt < Formula
 
   desc "CLI to test if a given TCP host/port are available"
   homepage "https://github.com/vishnubob/wait-for-it"
-  url "https://github.com/vishnubob/wait-for-it.git", ref: COMMIT
+  url "https://github.com/vishnubob/wait-for-it.git", revision: COMMIT
   version COMMIT
   sha256 "8a841290928ba4aa930089a16b8b31eb24f0cfd036dd8ee88be371130eb85961"
   license "MIT"

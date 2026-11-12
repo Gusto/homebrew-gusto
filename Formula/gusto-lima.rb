@@ -1,7 +1,9 @@
 class GustoLima < Formula
   desc "Gusto's Colima Brew Service"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
-  url "https://github.com/gusto/homebrew-gusto.git", branch: "main"
+  # Pinned to satisfy `brew audit`; install writes the launcher inline and never
+  # uses the checkout contents, so this does not need bumping.
+  url "https://github.com/gusto/homebrew-gusto.git", revision: "f04d612737cca370b4e9e08b0f72e9c774996ccd"
   version "0.1.2"
 
   depends_on "colima"
