@@ -11,4 +11,8 @@ class Packs < Formula
   def install
     bin.install "packs" => "pks"
   end
+
+  test do
+    assert_path_exists bin/"pks"
+  end
 end
