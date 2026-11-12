@@ -34,7 +34,12 @@ jobs:
 
       - run: brew test-bot --only-setup
 
-      - run: brew test-bot --only-tap-syntax
+      # Equivalent to `brew test-bot --only-tap-syntax`, but with the `specs`
+      # audit excluded: newer Homebrew requires a pinned `revision:` for git
+      # URLs, which our self-referencing `branch: "main"` formulae don't use.
+      - run: brew style gusto/gusto
+
+      - run: brew audit --except=installed,specs --tap=gusto/gusto
 
       - run: brew test-bot --only-formulae
         if: github.event_name == 'pull_request'
