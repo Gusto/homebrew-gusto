@@ -41,7 +41,7 @@ cask "gusto-wkhtmltopdf" do
               "/usr/local/lib/libwkhtmltox.dylib",
             ]
 
-  # No zap stanza required
+  zap :not_required
 
   caveats do
     files_in_usr_local

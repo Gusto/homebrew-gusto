@@ -1,8 +1,10 @@
 class GustoLima < Formula
   desc "Gusto's Colima Brew Service"
   homepage "https://github.com/abiosoft/colima/blob/main/README.md"
-  url "https://github.com/gusto/homebrew-gusto.git", branch: "main"
-  version "0.1.1"
+  # Pinned to satisfy `brew audit`; install writes the launcher inline and never
+  # uses the checkout contents, so this does not need bumping.
+  url "https://github.com/gusto/homebrew-gusto.git", revision: "f04d612737cca370b4e9e08b0f72e9c774996ccd"
+  version "0.1.2"
 
   depends_on "colima"
   depends_on "docker"
@@ -15,6 +17,10 @@ class GustoLima < Formula
     gusto_colima_script = Tempfile.new(["colima_gusto", ".sh"])
     gusto_colima_script.write <<~SCRIPT
       #!/bin/bash
+      # launchd starts brew services with a soft limit of 256 open files, which
+      # Lima's SSH port forwarder inherits (one fd per forwarded connection).
+      # Raise it so busy stacks (e.g. Karafka on 9092) don't get connections reset.
+      ulimit -n 4096 || echo "gusto-lima: could not raise open file limit" >&2
       exec colima -p gusto "$@"
     SCRIPT
 
